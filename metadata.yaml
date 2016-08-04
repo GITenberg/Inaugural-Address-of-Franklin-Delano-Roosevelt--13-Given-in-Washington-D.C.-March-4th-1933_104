@@ -1,0 +1,32 @@
+_repo: Inaugural-Address-of-Franklin-Delano-Roosevelt--13-Given-in-Washington-D.C.-March-4th-1933_104
+_version: 0.0.1
+alternative_title: Franklin Delano Roosevelt's First Inaugural Address
+creator:
+  author:
+    agent_name: Roosevelt, Franklin D. (Franklin Delano)
+    aliases:
+    - Roosevelt, Franklin Delano
+    - United States President (1933-1945)
+    birthdate: 1882
+    deathdate: 1945
+    gutenberg_agent_id: '67'
+    url: http://www.gutenberg.org/2009/agents/67
+    wikipedia: http://en.wikipedia.org/wiki/Franklin_D._Roosevelt
+description: ''
+gutenberg_issued: '1994-02-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '104'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Presidents -- United States -- Inaugural addresses'
+- !lcsh 'United States -- Politics and government -- 1933-1945'
+- !lcc 'E740'
+- !lcsh 'New Deal, 1933-1939'
+- GITenberg
+title: "Inaugural Address of Franklin Delano Roosevelt\r\nGiven in Washington, D.C.\
+  \ March 4th, 1933"
+url: http://www.gutenberg.org/ebooks/104
