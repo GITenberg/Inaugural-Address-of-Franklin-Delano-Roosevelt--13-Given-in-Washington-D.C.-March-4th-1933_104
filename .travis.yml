@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: Pv51XGKj8jB8rU4/XVvXs/a8KRsYwKj/zNU4/5SvK1xdYCmXahq8VLEI1jIHu0rp0G73Lhn2kr/wOof+vJJ8Qotb7GW2asUba7XR8+fUdwV85Hor2crrz2Lbb03Ns8Xmx7iAmI2i7jL4J1nbXCrUytAdQboUjr011K3AM9prpMJoqj0hho0vpxRxGKx2JeJ+m6iXuKvvNkMbxmlUX7Z0NB24nlH8v9oHGTZNkjSl3cGoa8NZOlmEPsz2jo04bExHuFXWbBFVxJYeRwLpXHY+BK0yQaQphnFmFATa2IApDMoqeMMo/xT7FBdV43Py01ne+/H3DwQ1GF+i1KJ6ybYUs25rWeVDEgtGqYHQpD9Tro1TxvChe29tzEchBxzBsKoLzsUTuoKq4ICWFFrU17OMwB115P+kaROwEt46Fg5WTkrbLs9bsuhff5WSFs9XsAjBblTpzSel3pRMhlGJiKwejVFZvwHQBMugMbwIYBaN5FcXYjJnOsXgo6OWREH49KJfaxkKDkTPbIXRGKb5qrca4oxPehysGpEs55K+mbEh/2hmZub/2GFdIec6e5EGI/loPcZ6IyDsBAuaHiX4EcPw0DKCyaw+ssa0JfDvhmz2jE/SeTFzK4w0V6EJ5HCI2JOrggcXN3JYqeLWQaJWlYixV5jaL49vHEL0UHOtkoMdXVU=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Inaugural-Address-of-Franklin-Delano-Roosevelt--13-Given-in-Washington-D.C.-March-4th-1933_104
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
